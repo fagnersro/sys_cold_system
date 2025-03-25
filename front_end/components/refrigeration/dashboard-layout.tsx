@@ -77,12 +77,12 @@ export function RefrigerationDashboardLayout({ children }: RefrigerationDashboar
   // Navigation items
   const navItems = [
     { name: "Overview", href: "/dashboard", icon: LayoutDashboard },
-    { name: "Equipment", href: "/dashboard/equipment", icon: Snowflake },
-    { name: "Maintenance", href: "/dashboard/maintenance", icon: Tool },
-    { name: "Schedule", href: "/dashboard/schedule", icon: Calendar },
-    { name: "Parts", href: "/dashboard/parts", icon: Package },
-    { name: "Reports", href: "/dashboard/reports", icon: BarChart3 },
-    { name: "Settings", href: "/dashboard/settings", icon: Settings },
+    { name: "Equipamento", href: "/dashboard/equipment", icon: Snowflake },
+    { name: "Manutenção", href: "/dashboard/maintenance", icon: Tool },
+    { name: "Agendar", href: "/dashboard/schedule", icon: Calendar },
+    { name: "Peças", href: "/dashboard/parts", icon: Package },
+    { name: "Relatórios", href: "/dashboard/reports", icon: BarChart3 },
+    { name: "Configurações", href: "/dashboard/settings", icon: Settings },
   ]
 
   return (
@@ -103,7 +103,7 @@ export function RefrigerationDashboardLayout({ children }: RefrigerationDashboar
                   <Snowflake className="h-5 w-5" />
                 </div>
               </div>
-              <span className="font-bold text-xl">FrostControl</span>
+              <span className="font-bold text-xl">FH Cooling Data</span>
             </Link>
             <Button variant="ghost" size="icon" onClick={() => setSidebarOpen(false)} className="lg:hidden">
               <X className="h-5 w-5" />
@@ -141,7 +141,7 @@ export function RefrigerationDashboardLayout({ children }: RefrigerationDashboar
           <div className="mx-4 mb-4 rounded-lg bg-red-500/10 p-4">
             <div className="mb-2 flex items-center gap-2 text-red-500">
               <AlertTriangle className="h-5 w-5" />
-              <h3 className="font-medium">Critical Alerts</h3>
+              <h3 className="font-medium">Alertas Críticos</h3>
             </div>
             <ul className="space-y-2 text-sm">
               <li className="flex items-center gap-2">
@@ -154,7 +154,7 @@ export function RefrigerationDashboardLayout({ children }: RefrigerationDashboar
               </li>
             </ul>
             <Button variant="destructive" size="sm" className="mt-3 w-full">
-              View All Alerts
+              Ver todos os alertas
             </Button>
           </div>
 
@@ -190,7 +190,7 @@ export function RefrigerationDashboardLayout({ children }: RefrigerationDashboar
             </div>
             <input
               type="search"
-              placeholder="Search equipment by ID or location..."
+              placeholder="Pesquise equipamentos por ID ou localização..."
               className="w-full rounded-lg border border-input bg-background py-2 pl-10 pr-4 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             />
           </div>
@@ -202,7 +202,7 @@ export function RefrigerationDashboardLayout({ children }: RefrigerationDashboar
               <span className="absolute right-1 top-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-medium text-white">
                 5
               </span>
-              <span className="sr-only">Notifications</span>
+              <span className="sr-only">Notificações</span>
             </Button>
 
             {/* User menu */}
@@ -215,20 +215,20 @@ export function RefrigerationDashboardLayout({ children }: RefrigerationDashboar
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuLabel>Minha conta</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
                   <User className="mr-2 h-4 w-4" />
-                  <span>Profile</span>
+                  <span>Perfil</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
                   <Settings className="mr-2 h-4 w-4" />
-                  <span>Settings</span>
+                  <span>Configurações</span>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
                   <LogOut className="mr-2 h-4 w-4" />
-                  <span>Log out</span>
+                  <span>Sair</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

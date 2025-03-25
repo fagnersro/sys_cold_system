@@ -12,21 +12,21 @@ export function StatusBadge({ status, type }: StatusBadgeProps) {
         return (
           <div className="inline-flex items-center gap-1 rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-700 dark:bg-green-900/30 dark:text-green-400">
             <CheckCircle className="h-3 w-3" />
-            <span>Completed</span>
+            <span>Concluído</span>
           </div>
         )
       case "In Progress":
         return (
           <div className="inline-flex items-center gap-1 rounded-full bg-yellow-100 px-2.5 py-0.5 text-xs font-medium text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400">
             <AlertTriangle className="h-3 w-3" />
-            <span>In Progress</span>
+            <span>Em Andamento</span>
           </div>
         )
       case "Scheduled":
         return (
           <div className="inline-flex items-center gap-1 rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">
             <Clock className="h-3 w-3" />
-            <span>Scheduled</span>
+            <span>Agendado</span>
           </div>
         )
       default:
@@ -40,14 +40,14 @@ export function StatusBadge({ status, type }: StatusBadgeProps) {
         return (
           <div className="inline-flex items-center gap-1 rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">
             <Tool className="h-3 w-3" />
-            <span>Preventive</span>
+            <span>Preventivo</span>
           </div>
         )
       case "Corrective":
         return (
           <div className="inline-flex items-center gap-1 rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-700 dark:bg-red-900/30 dark:text-red-400">
             <Wrench className="h-3 w-3" />
-            <span>Corrective</span>
+            <span>Corretivo</span>
           </div>
         )
       default:
