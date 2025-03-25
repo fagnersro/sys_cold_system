@@ -30,7 +30,9 @@ export default function LandingPage() {
             <Link href="#contact" className="hidden sm:block text-sm font-medium hover:text-blue-600 transition-colors">
               Contato
             </Link>
-            <FuturisticButton>Começar</FuturisticButton>
+            <Link href="/login">
+              <FuturisticButton>Começar</FuturisticButton>
+            </Link>
           </div>
         </div>
       </header>
