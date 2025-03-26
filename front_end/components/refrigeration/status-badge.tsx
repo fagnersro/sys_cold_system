@@ -2,7 +2,7 @@ import { CheckCircle, AlertTriangle, Clock, PenToolIcon as Tool, Wrench } from "
 
 interface StatusBadgeProps {
   status?: "Completed" | "In Progress" | "Scheduled"
-  type?: "Preventive" | "Corrective"
+  type?: "Preventive" | "Corrective" | "Emergency"
 }
 
 export function StatusBadge({ status, type }: StatusBadgeProps) {
@@ -45,11 +45,19 @@ export function StatusBadge({ status, type }: StatusBadgeProps) {
         )
       case "Corrective":
         return (
-          <div className="inline-flex items-center gap-1 rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-700 dark:bg-red-900/30 dark:text-red-400">
+          <div className="inline-flex items-center gap-1 rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-700 dark:bg-green-900/30 dark:text-green-400">
             <Wrench className="h-3 w-3" />
             <span>Corretivo</span>
           </div>
         )
+
+        case "Emergency":
+          return (
+            <div className="inline-flex items-center gap-1 rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-700 dark:bg-red-900/30 dark:text-red-400">
+              <Wrench className="h-3 w-3" />
+              <span>Emergência</span>
+            </div>
+          )
       default:
         return null
     }
