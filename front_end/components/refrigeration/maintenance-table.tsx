@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, type JSX } from "react"
+import { useEffect, useState, type JSX } from "react"
 import { ChevronDown, ChevronUp, MoreHorizontal, Eye, Edit, Trash } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
@@ -66,39 +66,65 @@ export function MaintenanceTable() {
   const [sortField, setSortField] = useState<SortField>("date")
   const [sortDirection, setSortDirection] = useState<SortDirection>("desc")
   const [filterType, setFilterType] = useState<FilterType>("All")
+
+  useEffect(() => {
+    let filtered = initialData
+  
+    if (filterType !== "All") {
+      filtered = initialData.filter(item => item.serviceType === filterType)
+    }
+  
+    const sorted = [...filtered].sort((a, b) => {
+      const aValue = a[sortField]
+      const bValue = b[sortField]
+  
+      if (sortField === "date") {
+        const aDate = new Date(aValue)
+        const bDate = new Date(bValue)
+        return sortDirection === "asc"
+          ? aDate.getTime() - bDate.getTime()
+          : bDate.getTime() - aDate.getTime()
+      }
+  
+      return sortDirection === "asc"
+        ? aValue.localeCompare(bValue)
+        : bValue.localeCompare(aValue)
+    })
+  
+    setData(sorted)
+  }, [sortField, sortDirection, filterType])
+  
   
   // Handle sorting
   const handleSort = (field: SortField) => {
+    let newSortDirection: SortDirection
+  
     if (sortField === field) {
-      setSortDirection(sortDirection === "asc" ? "desc" : "asc")
+      newSortDirection = sortDirection === "asc" ? "desc" : "asc"
     } else {
-       
-      setSortDirection(sortDirection === "asc" ? "desc" : "asc")
       setSortField(field)
-      setSortDirection("asc")
+      newSortDirection = "asc"
+    }
     
-    // Sort the data
+    setSortDirection(newSortDirection)
+
     const sortedData = [...data].sort((a, b) => {
       const aValue = a[field]
       const bValue = b[field]
-      
+  
       if (field === "date") {
-        // Date comparison
         const aDate = new Date(aValue)
         const bDate = new Date(bValue)
-        return sortDirection === "asc" 
-          ? aDate.getTime() - bDate.getTime() 
+        return newSortDirection === "asc"
+          ? aDate.getTime() - bDate.getTime()
           : bDate.getTime() - aDate.getTime()
       } else {
-        // String comparison
-        if (sortDirection === "asc") {
-          return aValue.localeCompare(bValue)
-        } else {
-          return bValue.localeCompare(aValue)
-        }
+        return newSortDirection === "asc"
+          ? aValue.localeCompare(bValue)
+          : bValue.localeCompare(aValue)
       }
     })
-    
+  
     setData(sortedData)
   }
   
@@ -112,9 +138,6 @@ export function MaintenanceTable() {
       const filteredData = initialData.filter(item => item.serviceType === type)
       setData(filteredData)
     }
-    
-    // Re-apply current sort after filtering
-    handleSort(sortField)
   }
   
   // Render sort indicator
@@ -220,7 +243,12 @@ export function MaintenanceTable() {
               <td className="px-4 py-3 text-sm">
                 <StatusBadge type={row.serviceType as "Preventive" | "Corrective"} />
               </td>
-              <td className="px-4 py-3 text-sm">{new Date(row.date).toLocaleDateString()}</td>
+              <td className="px-4 py-3 text-sm">{new Date(row.date).toLocaleDateString("pt-BR", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "2-digit"
+              })}
+              </td>
               <td className="px-4 py-3 text-sm">{row.technician}</td>
               <td className="px-4 py-3 text-sm">
                 <StatusBadge status={row.status as "Completed" | "In Progress" | "Scheduled"} />
@@ -276,6 +304,6 @@ export function MaintenanceTable() {
     </div>
   )
  }
-}
+
 
 
