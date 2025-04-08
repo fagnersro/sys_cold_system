@@ -105,7 +105,7 @@ export function MaintenanceTable() {
       setSortField(field)
       newSortDirection = "asc"
     }
-    
+
     setSortDirection(newSortDirection)
 
     const sortedData = [...data].sort((a, b) => {
@@ -155,27 +155,27 @@ export function MaintenanceTable() {
     <div className="overflow-x-auto">
       <div className="flex items-center justify-between px-4 py-2">
         <div className="flex items-center gap-2">
-          <span className="text-sm font-medium">Filter:</span>
+          <span className="text-sm font-medium">Filtro:</span>
           <Button 
             variant={filterType === "All" ? "default" : "outline"} 
             size="sm"
             onClick={() => handleFilter("All")}
           >
-            All
+            Todos
           </Button>
           <Button 
             variant={filterType === "Preventive" ? "default" : "outline"} 
             size="sm"
             onClick={() => handleFilter("Preventive")}
           >
-            Preventive
+            Preventivo
           </Button>
           <Button 
             variant={filterType === "Corrective" ? "default" : "outline"} 
             size="sm"
             onClick={() => handleFilter("Corrective")}
           >
-            Corrective
+            Corretivo
           </Button>
         </div>
       </div>
@@ -188,7 +188,7 @@ export function MaintenanceTable() {
               onClick={() => handleSort("id")}
             >
               <div className="flex cursor-pointer items-center">
-                Equipment ID
+                Equipamento ID
                 {renderSortIndicator("id")}
               </div>
             </th>
@@ -197,7 +197,7 @@ export function MaintenanceTable() {
               onClick={() => handleSort("serviceType")}
             >
               <div className="flex cursor-pointer items-center">
-                Service Type
+                Tipo de Serviço
                 {renderSortIndicator("serviceType")}
               </div>
             </th>
@@ -206,7 +206,7 @@ export function MaintenanceTable() {
               onClick={() => handleSort("date")}
             >
               <div className="flex cursor-pointer items-center">
-                Date
+                Data
                 {renderSortIndicator("date")}
               </div>
             </th>
@@ -215,7 +215,7 @@ export function MaintenanceTable() {
               onClick={() => handleSort("technician")}
             >
               <div className="flex cursor-pointer items-center">
-                Technician
+                Técnico
                 {renderSortIndicator("technician")}
               </div>
             </th>
@@ -229,7 +229,7 @@ export function MaintenanceTable() {
               </div>
             </th>
             <th className="px-4 py-3 text-right text-sm font-medium text-muted-foreground">
-              Actions
+              Ações
             </th>
           </tr>
         </thead>
@@ -258,23 +258,23 @@ export function MaintenanceTable() {
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" size="icon">
                       <MoreHorizontal className="h-4 w-4" />
-                      <span className="sr-only">Open menu</span>
+                      <span className="sr-only">Abrir Menu</span>
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
-                    <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                    <DropdownMenuLabel>Ações</DropdownMenuLabel>
                     <DropdownMenuItem>
                       <Eye className="mr-2 h-4 w-4" />
-                      <span>View details</span>
+                      <span>Visualizar Detalhes</span>
                     </DropdownMenuItem>
                     <DropdownMenuItem>
                       <Edit className="mr-2 h-4 w-4" />
-                      <span>Edit</span>
+                      <span>Editar</span>
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem className="text-red-600">
                       <Trash className="mr-2 h-4 w-4" />
-                      <span>Delete</span>
+                      <span>Excluir</span>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
@@ -287,17 +287,17 @@ export function MaintenanceTable() {
       {/* Pagination */}
       <div className="flex items-center justify-between px-4 py-4">
         <div className="text-sm text-muted-foreground">
-          Showing <strong>{data.length}</strong> of <strong>{initialData.length}</strong> records
+          Mostrando <strong>{data.length}</strong> de <strong>{initialData.length}</strong> registros
         </div>
         <div className="flex items-center gap-2">
           <Button variant="outline" size="sm" disabled>
-            Previous
+            Anterior
           </Button>
           <Button variant="outline" size="sm" className="bg-primary text-primary-foreground">
             1
           </Button>
           <Button variant="outline" size="sm">
-            Next
+            Proximo
           </Button>
         </div>
       </div>
