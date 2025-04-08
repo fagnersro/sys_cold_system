@@ -225,26 +225,26 @@ export default function SchedulePage() {
 
   // Month names
   const monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    "Janeiro",
+    "Fevereiro",
+    "Março",
+    "Abril",
+    "Maio",
+    "Junho",
+    "Julho",
+    "Agosto",
+    "Setembro",
+    "Outubro",
+    "Novembro",
+    "Dezembro",
   ]
 
   return (
     <RefrigerationDashboardLayout>
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-2">
-          <h1 className="text-2xl font-bold tracking-tight">Maintenance Schedule</h1>
-          <p className="text-muted-foreground">Plan and manage upcoming maintenance activities</p>
+          <h1 className="text-2xl font-bold tracking-tight">Cronograma de Manutenção</h1>
+          <p className="text-muted-foreground">Planejar e gerenciar as próximas atividades de manutenção</p>
         </div>
 
         {/* Search and Actions */}
@@ -255,7 +255,7 @@ export default function SchedulePage() {
             </div>
             <Input
               type="search"
-              placeholder="Search schedules..."
+              placeholder="Pesquisar Horários..."
               className="pl-10"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -270,7 +270,7 @@ export default function SchedulePage() {
                 className="px-3"
               >
                 <CalendarDays className="h-4 w-4 mr-2" />
-                Calendar
+                Calendário
               </Button>
               <Button
                 variant={viewMode === "list" ? "default" : "ghost"}
@@ -279,12 +279,12 @@ export default function SchedulePage() {
                 className="px-3"
               >
                 <ListIcon className="h-4 w-4 mr-2" />
-                List
+                  Lista
               </Button>
             </div>
             <Button onClick={handleAddNew} className="gap-2">
               <Plus className="h-4 w-4" />
-              <span className="hidden sm:inline">Schedule Maintenance</span>
+              <span className="hidden sm:inline">Manutenção Programada</span>
             </Button>
           </div>
         </div>
@@ -308,7 +308,7 @@ export default function SchedulePage() {
 
             <div className="p-4">
               <div className="grid grid-cols-7 gap-1">
-                {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day, index) => (
+                {["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"].map((day, index) => (
                   <div key={index} className="text-center font-medium text-sm py-2">
                     {day}
                   </div>
@@ -359,7 +359,7 @@ export default function SchedulePage() {
         {viewMode === "list" && (
           <div className="rounded-xl border bg-card text-card-foreground shadow">
             <div className="p-4 border-b">
-              <h2 className="text-lg font-semibold">Upcoming Maintenance</h2>
+              <h2 className="text-lg font-semibold">Próxima Manutenção</h2>
             </div>
 
             <div className="divide-y">
@@ -393,7 +393,7 @@ export default function SchedulePage() {
                               <Clock className="h-3.5 w-3.5" />
                               <span>{schedule.time}</span>
                             </div>
-                            <div>Technician: {schedule.technician}</div>
+                            <div>Técnico(a): {schedule.technician}</div>
                           </div>
                         </div>
                         <div className="flex items-center gap-2">
@@ -405,7 +405,7 @@ export default function SchedulePage() {
                               onClick={() => handleCompletionConfirm(schedule)}
                             >
                               <CheckCircle className="h-4 w-4" />
-                              <span>Complete</span>
+                              <span>Completo</span>
                             </Button>
                           )}
                           <Button variant="ghost" size="icon" onClick={() => handleEdit(schedule)}>
@@ -420,7 +420,7 @@ export default function SchedulePage() {
                   )
                 })
               ) : (
-                <div className="p-8 text-center text-muted-foreground">No scheduled maintenance found.</div>
+                <div className="p-8 text-center text-muted-foreground">Nenhuma Manutenção Programada Encontrada.</div>
               )}
             </div>
           </div>
@@ -431,26 +431,26 @@ export default function SchedulePage() {
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent className="sm:max-w-[600px]">
           <DialogHeader>
-            <DialogTitle>{selectedSchedule ? "Edit Scheduled Maintenance" : "Schedule New Maintenance"}</DialogTitle>
+            <DialogTitle>{selectedSchedule ? "Editar Manutenção Programada" : "Agendar Nova Manutenção"}</DialogTitle>
             <DialogDescription>
               {selectedSchedule
-                ? "Update the scheduled maintenance details below."
-                : "Fill in the details to schedule a new maintenance."}
+                ? "Atualize os detalhes da manutenção programada abaixo."
+                : "Preencha os detalhes para agendar uma nova manutenção."}
             </DialogDescription>
           </DialogHeader>
 
           <div className="grid gap-4 py-4">
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="type">Maintenance Type</Label>
+                <Label htmlFor="type">Tipo de Manutenção</Label>
                 <Select defaultValue={selectedSchedule?.type || "Preventive"}>
                   <SelectTrigger id="type">
                     <SelectValue placeholder="Select type" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="Preventive">Preventive</SelectItem>
-                    <SelectItem value="Corrective">Corrective</SelectItem>
-                    <SelectItem value="Emergency">Emergency</SelectItem>
+                    <SelectItem value="Preventive">Preventivo</SelectItem>
+                    <SelectItem value="Corrective">Corretivo</SelectItem>
+                    <SelectItem value="Emergency">Emergência</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -461,20 +461,20 @@ export default function SchedulePage() {
                     <SelectValue placeholder="Select priority" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="Critical">Critical</SelectItem>
-                    <SelectItem value="High">High</SelectItem>
-                    <SelectItem value="Medium">Medium</SelectItem>
-                    <SelectItem value="Low">Low</SelectItem>
+                    <SelectItem value="Critical">Crítico</SelectItem>
+                    <SelectItem value="High">Alto</SelectItem>
+                    <SelectItem value="Medium">Médio</SelectItem>
+                    <SelectItem value="Low">Baixo</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="equipment">Equipment</Label>
+              <Label htmlFor="equipment">Equipamento</Label>
               <Select defaultValue={selectedSchedule?.equipmentId || ""}>
                 <SelectTrigger id="equipment">
-                  <SelectValue placeholder="Select equipment" />
+                  <SelectValue placeholder="Selecione o equipamento" />
                 </SelectTrigger>
                 <SelectContent>
                   {equipmentData.map((equipment) => (
@@ -488,30 +488,30 @@ export default function SchedulePage() {
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="date">Date</Label>
+                <Label htmlFor="date">Data</Label>
                 <Input id="date" type="date" defaultValue={selectedSchedule?.date || ""} required />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="time">Time</Label>
+                <Label htmlFor="time">Horário</Label>
                 <Input id="time" type="time" defaultValue={selectedSchedule?.time || ""} required />
               </div>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="technician">Technician</Label>
+              <Label htmlFor="technician">Técnico (a)</Label>
               <Input
                 id="technician"
-                placeholder="Technician name"
+                placeholder="Nome do técnico"
                 defaultValue={selectedSchedule?.technician || ""}
                 required
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="description">Description</Label>
+              <Label htmlFor="description">Descrição</Label>
               <Textarea
                 id="description"
-                placeholder="Describe the maintenance to be performed..."
+                placeholder="Descreva a manutenção a ser realizada..."
                 className="min-h-[100px]"
                 defaultValue={selectedSchedule?.description || ""}
               />
@@ -524,16 +524,16 @@ export default function SchedulePage() {
                 className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
               />
               <Label htmlFor="notify" className="text-sm">
-                Send notification reminders (24h and 1h before scheduled time)
+                Enviar lembretes de notificação (24h e 1h antes do horário agendado)
               </Label>
             </div>
           </div>
 
           <DialogFooter>
             <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
-              Cancel
+              Cancelar
             </Button>
-            <Button type="submit">{selectedSchedule ? "Update Schedule" : "Schedule Maintenance"}</Button>
+            <Button type="submit">{selectedSchedule ? "Atualizar Cronograma" : "Manutenção Programada"}</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -542,18 +542,18 @@ export default function SchedulePage() {
       <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>Confirm Deletion</DialogTitle>
+            <DialogTitle>Confirmar Exclusão</DialogTitle>
             <DialogDescription>
-              Are you sure you want to delete this scheduled maintenance for {selectedSchedule?.equipmentId}? This
-              action cannot be undone.
+              Tem certeza de que deseja excluir esta manutenção programada para {selectedSchedule?.equipmentId}? Esta
+              ação não pode ser desfeita.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)}>
-              Cancel
+              Cancelar
             </Button>
             <Button variant="destructive" onClick={() => setIsDeleteDialogOpen(false)}>
-              Delete Schedule
+             Excluir agendamento
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -563,16 +563,16 @@ export default function SchedulePage() {
       <Dialog open={isConfirmDialogOpen} onOpenChange={setIsConfirmDialogOpen}>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>Confirm Completion</DialogTitle>
+            <DialogTitle>Confirmar Conclusão</DialogTitle>
             <DialogDescription>
-              Mark this maintenance task as completed? This will update the equipment's maintenance history.
+              Marcar esta tarefa de manutenção como concluída? Isso atualizará o histórico de manutenção do equipamento.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <Button variant="outline" onClick={() => setIsConfirmDialogOpen(false)}>
-              Cancel
+              Cancelar
             </Button>
-            <Button onClick={() => setIsConfirmDialogOpen(false)}>Confirm Completion</Button>
+            <Button onClick={() => setIsConfirmDialogOpen(false)}>Confirmar conclusão</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

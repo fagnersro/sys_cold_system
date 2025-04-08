@@ -50,8 +50,7 @@ export function StatusBadge({ status, type }: StatusBadgeProps) {
             <span>Corretivo</span>
           </div>
         )
-
-        case "Emergency":
+      case "Emergency":
           return (
             <div className="inline-flex items-center gap-1 rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-700 dark:bg-red-900/30 dark:text-red-400">
               <Wrench className="h-3 w-3" />
