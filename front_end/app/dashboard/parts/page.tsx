@@ -210,8 +210,8 @@ export default function PartsPage() {
     <RefrigerationDashboardLayout>
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-2">
-          <h1 className="text-2xl font-bold tracking-tight">Parts Inventory</h1>
-          <p className="text-muted-foreground">Manage replacement parts and track inventory levels</p>
+          <h1 className="text-2xl font-bold tracking-tight">Inventário de Peças</h1>
+          <p className="text-muted-foreground">Gerencie peças de reposição e acompanhe os níveis de estoque</p>
         </div>
 
         {/* Low Stock Alert */}
@@ -220,9 +220,9 @@ export default function PartsPage() {
             <div className="flex items-start gap-3">
               <AlertTriangle className="mt-0.5 h-5 w-5 text-yellow-600 dark:text-yellow-500" />
               <div>
-                <h3 className="font-medium text-yellow-800 dark:text-yellow-500">Low Stock Alert</h3>
+                <h3 className="font-medium text-yellow-800 dark:text-yellow-500">Alerta de estoque baixo</h3>
                 <p className="mt-1 text-sm text-yellow-700 dark:text-yellow-400">
-                  {lowStockParts.length} {lowStockParts.length === 1 ? "part" : "parts"} below minimum stock level.
+                  {lowStockParts.length} {lowStockParts.length === 1 ? "peça" : "peças"} abaixo do nível mínimo de estoque.
                 </p>
                 <div className="mt-2 flex flex-wrap gap-2">
                   {lowStockParts.map((part) => (
@@ -247,7 +247,7 @@ export default function PartsPage() {
             </div>
             <Input
               type="search"
-              placeholder="Search parts by ID, name or category..."
+              placeholder="Pesquise peças por ID, nome ou categoria..."
               className="pl-10"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -256,15 +256,15 @@ export default function PartsPage() {
           <div className="flex items-center gap-2">
             <Button variant="outline" size="icon">
               <Filter className="h-4 w-4" />
-              <span className="sr-only">Filter</span>
+              <span className="sr-only">Filtro</span>
             </Button>
             <Button variant="outline" className="gap-2">
               <Download className="h-4 w-4" />
-              <span className="hidden sm:inline">Export</span>
+              <span className="hidden sm:inline">Exportar</span>
             </Button>
             <Button onClick={handleAddNew} className="gap-2">
               <Plus className="h-4 w-4" />
-              <span className="hidden sm:inline">Add Part</span>
+              <span className="hidden sm:inline">Adicionar Peça</span>
             </Button>
           </div>
         </div>
@@ -274,11 +274,11 @@ export default function PartsPage() {
           <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab}>
             <div className="flex items-center justify-between border-b px-4 py-2">
               <TabsList>
-                <TabsTrigger value="all">All Categories</TabsTrigger>
-                <TabsTrigger value="compressor">Compressors</TabsTrigger>
-                <TabsTrigger value="filter">Filters</TabsTrigger>
-                <TabsTrigger value="sensor">Sensors</TabsTrigger>
-                <TabsTrigger value="electronics">Electronics</TabsTrigger>
+                <TabsTrigger value="all">Todas as categorias</TabsTrigger>
+                <TabsTrigger value="compressor">Compressores</TabsTrigger>
+                <TabsTrigger value="filter">Filtros</TabsTrigger>
+                <TabsTrigger value="sensor">Sensores</TabsTrigger>
+                <TabsTrigger value="electronics">Eletrônicos</TabsTrigger>
               </TabsList>
             </div>
 
@@ -288,12 +288,12 @@ export default function PartsPage() {
                   <TableHeader>
                     <TableRow>
                       <TableHead>ID</TableHead>
-                      <TableHead>Name</TableHead>
-                      <TableHead>Category</TableHead>
-                      <TableHead>Stock</TableHead>
-                      <TableHead>Price</TableHead>
-                      <TableHead>Compatible With</TableHead>
-                      <TableHead className="text-right">Actions</TableHead>
+                      <TableHead>Nome</TableHead>
+                      <TableHead>Categoria</TableHead>
+                      <TableHead>Estoque</TableHead>
+                      <TableHead>Preço</TableHead>
+                      <TableHead>Compatível com</TableHead>
+                      <TableHead className="text-right">Ações</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -360,7 +360,7 @@ export default function PartsPage() {
                     ) : (
                       <TableRow>
                         <TableCell colSpan={7} className="h-24 text-center">
-                          No parts found.
+                          Nenhuma peça encontrada
                         </TableCell>
                       </TableRow>
                     )}
@@ -391,10 +391,10 @@ export default function PartsPage() {
         {/* Usage History Section */}
         <div className="rounded-xl border bg-card text-card-foreground shadow">
           <div className="flex items-center justify-between border-b px-6 py-4">
-            <h2 className="text-lg font-semibold">Recent Usage History</h2>
+            <h2 className="text-lg font-semibold">Histórico de uso Recente</h2>
             <Button variant="outline" size="sm" className="gap-2">
               <BarChart3 className="h-4 w-4" />
-              <span>View Analytics</span>
+              <span>Visualizar Análises</span>
             </Button>
           </div>
 
@@ -402,12 +402,12 @@ export default function PartsPage() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Date</TableHead>
-                  <TableHead>Part</TableHead>
-                  <TableHead>Equipment</TableHead>
-                  <TableHead>Quantity</TableHead>
-                  <TableHead>Technician</TableHead>
-                  <TableHead>Maintenance ID</TableHead>
+                  <TableHead>Data</TableHead>
+                  <TableHead>Peça</TableHead>
+                  <TableHead>Equipamento</TableHead>
+                  <TableHead>Quantidade</TableHead>
+                  <TableHead>Tecnico (a)</TableHead>
+                  <TableHead>Manutênção ID</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -450,31 +450,31 @@ export default function PartsPage() {
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent className="sm:max-w-[600px]">
           <DialogHeader>
-            <DialogTitle>{selectedPart ? "Edit Part" : "Add New Part"}</DialogTitle>
+            <DialogTitle>{selectedPart ? "Editar Peça" : "Adicionar nova Peça"}</DialogTitle>
             <DialogDescription>
-              {selectedPart ? "Update the part details below." : "Fill in the details to add a new part to inventory."}
+              {selectedPart ? "Atualize os detalhes da peça abaixo" : "Preencha detalhes para adicionar uma nova peça ao inventário"}
             </DialogDescription>
           </DialogHeader>
 
           <div className="grid gap-4 py-4">
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="name">Part Name</Label>
+                <Label htmlFor="name">Nome da Peça</Label>
                 <Input id="name" placeholder="e.g. Compressor A200" defaultValue={selectedPart?.name || ""} required />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="category">Category</Label>
+                <Label htmlFor="category">Categoria</Label>
                 <Select defaultValue={selectedPart?.category || ""}>
                   <SelectTrigger id="category">
-                    <SelectValue placeholder="Select category" />
+                    <SelectValue placeholder="Selecione a Categoria" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="Compressor">Compressor</SelectItem>
-                    <SelectItem value="Filter">Filter</SelectItem>
-                    <SelectItem value="Condenser">Condenser</SelectItem>
+                    <SelectItem value="Filter">Filtro</SelectItem>
+                    <SelectItem value="Condenser">Condensador</SelectItem>
                     <SelectItem value="Motor">Motor</SelectItem>
                     <SelectItem value="Sensor">Sensor</SelectItem>
-                    <SelectItem value="Electronics">Electronics</SelectItem>
+                    <SelectItem value="Electronics">Eletronicos</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -482,11 +482,11 @@ export default function PartsPage() {
 
             <div className="grid grid-cols-3 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="stock">Current Stock</Label>
+                <Label htmlFor="stock">Estoque Atual</Label>
                 <Input id="stock" type="number" min="0" defaultValue={selectedPart?.stock.toString() || "0"} required />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="minLevel">Minimum Level</Label>
+                <Label htmlFor="minLevel">Nível Mínimo</Label>
                 <Input
                   id="minLevel"
                   type="number"
@@ -496,7 +496,7 @@ export default function PartsPage() {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="price">Price ($)</Label>
+                <Label htmlFor="price">Preço ($)</Label>
                 <Input
                   id="price"
                   type="number"
@@ -509,7 +509,7 @@ export default function PartsPage() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="location">Storage Location</Label>
+              <Label htmlFor="location">Local de armazenamento</Label>
               <Input
                 id="location"
                 placeholder="e.g. Warehouse A, Shelf 3"
@@ -518,7 +518,7 @@ export default function PartsPage() {
             </div>
 
             <div className="space-y-2">
-              <Label>Compatible Equipment</Label>
+              <Label>Equipamento compatível</Label>
               <div className="max-h-[150px] overflow-y-auto rounded-md border p-4">
                 {equipmentData.map((equipment) => (
                   <div key={equipment.id} className="flex items-center space-x-2 py-2">
@@ -541,16 +541,16 @@ export default function PartsPage() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="notes">Notes</Label>
-              <Textarea id="notes" placeholder="Additional information about this part..." className="min-h-[80px]" />
+              <Label htmlFor="notes">Notas</Label>
+              <Textarea id="notes" placeholder="Informações adicionais sobre esta peça..." className="min-h-[80px]" />
             </div>
           </div>
 
           <DialogFooter>
             <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
-              Cancel
+              Cancelar
             </Button>
-            <Button type="submit">{selectedPart ? "Update Part" : "Add Part"}</Button>
+            <Button type="submit">{selectedPart ? "Atualizar Peça" : "Adicionar Peça"}</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -559,17 +559,17 @@ export default function PartsPage() {
       <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>Confirm Deletion</DialogTitle>
+            <DialogTitle>Confirmar Exclusão</DialogTitle>
             <DialogDescription>
-              Are you sure you want to delete {selectedPart?.name} ({selectedPart?.id})? This action cannot be undone.
+              Tem certeza que deseja excluir {selectedPart?.name} ({selectedPart?.id})? Esta ação não pode ser desfeita.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)}>
-              Cancel
+              Cancelar
             </Button>
             <Button variant="destructive" onClick={() => setIsDeleteDialogOpen(false)}>
-              Delete Part
+              Deletar Peça
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -579,8 +579,8 @@ export default function PartsPage() {
       <Dialog open={isQrDialogOpen} onOpenChange={setIsQrDialogOpen}>
         <DialogContent className="sm:max-w-[400px]">
           <DialogHeader>
-            <DialogTitle>Part QR Code</DialogTitle>
-            <DialogDescription>Scan this code to quickly identify and track {selectedPart?.name}.</DialogDescription>
+            <DialogTitle>QR Code da Peça</DialogTitle>
+            <DialogDescription>Escaneie este código para indentificar e rastrear rapidamente o {selectedPart?.name}.</DialogDescription>
           </DialogHeader>
 
           <div className="flex flex-col items-center justify-center py-4">
@@ -598,9 +598,9 @@ export default function PartsPage() {
 
           <DialogFooter>
             <Button variant="outline" onClick={() => setIsQrDialogOpen(false)}>
-              Close
+              Fechar
             </Button>
-            <Button>Print QR Code</Button>
+            <Button>Imprimir QR Code</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
