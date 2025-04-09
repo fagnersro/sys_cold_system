@@ -97,7 +97,7 @@ export function EquipmentAccordion({ stores }: { stores: any[] }) {
                             <div className="text-xs text-muted-foreground">{e.serialNumber}</div>
                           </TableCell>
                           <TableCell>
-                            <StatusBadge status={e.status} />
+                            <StatusBadge statusEquipment={e.status}/>
                           </TableCell>
                           <TableCell>{new Date(e.installationDate).toLocaleDateString("pt-BR", {
                             day: '2-digit',

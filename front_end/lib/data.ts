@@ -8,7 +8,7 @@ export async function getStoresWithEquipments() {
   ]
 
   const equipmentData = [
-    {
+        {
           id: "RF-001",
           model: "CoolMaster X500",
           serialNumber: "CM-X500-12345",

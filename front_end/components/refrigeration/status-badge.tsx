@@ -5,7 +5,11 @@ interface StatusBadgeProps {
   type?: "Preventive" | "Corrective" | "Emergency"
 }
 
-export function StatusBadge({ status, type }: StatusBadgeProps) {
+interface StatusBadgePropsEquipment {
+  statusEquipment?: "Operational" | "Maintenance Required" | "Critical Alert"
+}
+
+export function StatusBadge({ status, type, statusEquipment }: StatusBadgeProps & StatusBadgePropsEquipment) {
   if (status) {
     switch (status) {
       case "Completed":
@@ -27,6 +31,34 @@ export function StatusBadge({ status, type }: StatusBadgeProps) {
           <div className="inline-flex items-center gap-1 rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">
             <Clock className="h-3 w-3" />
             <span>Agendado</span>
+          </div>
+        )
+      default:
+        return null
+    }
+  }
+
+  if (statusEquipment) {
+    switch (statusEquipment) {
+      case "Operational":
+        return (
+          <div className="inline-flex items-center gap-1 rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-700 dark:bg-green-900/30 dark:text-green-400">
+            <CheckCircle className="h-3 w-3" />
+            <span>Operacional</span>
+          </div>
+        )
+      case "Maintenance Required":
+        return (
+          <div className="inline-flex items-center gap-1 rounded-full bg-yellow-100 px-2.5 py-0.5 text-xs font-medium text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400">
+            <AlertTriangle className="h-3 w-3" />
+            <span>Manutenção necessária</span>
+          </div>
+        )
+      case "Critical Alert":
+        return (
+          <div className="inline-flex items-center gap-1 rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-700 dark:bg-red-900/30 dark:text-red-400">
+            <Clock className="h-3 w-3" />
+            <span>Alerta Critíco</span>
           </div>
         )
       default:
