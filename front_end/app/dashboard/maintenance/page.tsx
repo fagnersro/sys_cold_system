@@ -17,9 +17,9 @@ import {
 } from "@/components/ui/dialog"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Plus, Search, Edit, Trash, Upload, Filter, FileText } from "lucide-react"
-import { StatusBadge } from "@/components/refrigeration/status-badge"
+import { Plus, Search, Upload, Filter } from "lucide-react"
+
+import { MaintenanceTable } from "@/components/refrigeration/table-maintenance"
 
 // Mock data for equipment
 const equipmentData = [
@@ -108,6 +108,8 @@ const maintenanceData = [
     reportUrl: "#",
   },
 ]
+
+const maintenanceTypes = ['all', 'preventive', 'corrective', 'emergency'];
 
 export default function MaintenancePage() {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
@@ -203,322 +205,30 @@ export default function MaintenancePage() {
           <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab}>
             <div className="flex items-center justify-between border-b px-4 py-2">
               <TabsList>
-                <TabsTrigger value="all">Todos</TabsTrigger>
-                <TabsTrigger value="preventive">Preventivo</TabsTrigger>
-                <TabsTrigger value="corrective">Corretivo</TabsTrigger>
-                <TabsTrigger value="emergency">Emergência</TabsTrigger>
+                {maintenanceTypes.map((type) => (
+                  <TabsTrigger key={type} value={type}>
+                    {
+                      type === 'all' ? 'Todos' :
+                      type === 'preventive' ? 'Preventivo' :
+                      type === 'corrective' ? 'Corretivo' : 'Emergência'
+                    }
+                  </TabsTrigger>
+                ))}
               </TabsList>
             </div>
-
-            <TabsContent value="all" className="m-0">
-              <div className="overflow-x-auto">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>ID</TableHead>
-                      <TableHead>Equipamento</TableHead>
-                      <TableHead>Tipo</TableHead>
-                      <TableHead>Data</TableHead>
-                      <TableHead>Técnico (a)</TableHead>
-                      <TableHead>Status</TableHead>
-                      <TableHead className="text-right">Ações</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {filteredMaintenance.length > 0 ? (
-                      filteredMaintenance.map((maintenance) => {
-                        const equipment = getEquipmentDetails(maintenance.equipmentId)
-
-                        return (
-                          <TableRow key={maintenance.id} className="hover:bg-muted/50">
-                            <TableCell className="font-medium">{maintenance.id}</TableCell>
-                            <TableCell>
-                              <div>
-                                <div>{maintenance.equipmentId}</div>
-                                <div className="text-xs text-muted-foreground">
-                                  {equipment?.model} ({equipment?.storeName})
-                                </div>
-                              </div>
-                            </TableCell>
-                            <TableCell>
-                              <StatusBadge type={maintenance.type as any} />
-                            </TableCell>
-                            <TableCell>{new Date(maintenance.date).toLocaleDateString()}</TableCell>
-                            <TableCell>{maintenance.technician}</TableCell>
-                            <TableCell>
-                              <StatusBadge status={maintenance.status as any} />
-                            </TableCell>
-                            <TableCell className="text-right">
-                              <div className="flex items-center justify-end gap-2">
-                                <Button variant="ghost" size="icon" title="View Report">
-                                  <FileText className="h-4 w-4" />
-                                </Button>
-                                <Button
-                                  variant="ghost"
-                                  size="icon"
-                                  title="Edit"
-                                  onClick={() => handleEdit(maintenance)}
-                                >
-                                  <Edit className="h-4 w-4" />
-                                </Button>
-                                <Button
-                                  variant="ghost"
-                                  size="icon"
-                                  title="Delete"
-                                  onClick={() => handleDeleteConfirm(maintenance)}
-                                >
-                                  <Trash className="h-4 w-4" />
-                                </Button>
-                              </div>
-                            </TableCell>
-                          </TableRow>
-                        )
-                      })
-                    ) : (
-                      <TableRow>
-                        <TableCell colSpan={7} className="h-24 text-center">
-                          Nenhum registro de manutenção encontrado.
-                        </TableCell>
-                      </TableRow>
-                    )}
-                  </TableBody>
-                </Table>
-              </div>
-            </TabsContent>
-
-            <TabsContent value="preventive" className="m-0">
-              {/* Same table structure as "all" tab */}
-
-              <div className="overflow-x-auto">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>ID</TableHead>
-                      <TableHead>Equipamento</TableHead>
-                      <TableHead>Tipo</TableHead>
-                      <TableHead>Data</TableHead>
-                      <TableHead>Técnico (a)</TableHead>
-                      <TableHead>Status</TableHead>
-                      <TableHead className="text-right">Ações</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {filteredMaintenance.length > 0 ? (
-                      filteredMaintenance.map((maintenance) => {
-                        const equipment = getEquipmentDetails(maintenance.equipmentId)
-
-                        return (
-                          <TableRow key={maintenance.id} className="hover:bg-muted/50">
-                            <TableCell className="font-medium">{maintenance.id}</TableCell>
-                            <TableCell>
-                              <div>
-                                <div>{maintenance.equipmentId}</div>
-                                <div className="text-xs text-muted-foreground">
-                                  {equipment?.model} ({equipment?.storeName})
-                                </div>
-                              </div>
-                            </TableCell>
-                            <TableCell>
-                              <StatusBadge type={maintenance.type as any} />
-                            </TableCell>
-                            <TableCell>{new Date(maintenance.date).toLocaleDateString()}</TableCell>
-                            <TableCell>{maintenance.technician}</TableCell>
-                            <TableCell>
-                              <StatusBadge status={maintenance.status as any} />
-                            </TableCell>
-                            <TableCell className="text-right">
-                              <div className="flex items-center justify-end gap-2">
-                                <Button variant="ghost" size="icon" title="View Report">
-                                  <FileText className="h-4 w-4" />
-                                </Button>
-                                <Button
-                                  variant="ghost"
-                                  size="icon"
-                                  title="Edit"
-                                  onClick={() => handleEdit(maintenance)}
-                                >
-                                  <Edit className="h-4 w-4" />
-                                </Button>
-                                <Button
-                                  variant="ghost"
-                                  size="icon"
-                                  title="Delete"
-                                  onClick={() => handleDeleteConfirm(maintenance)}
-                                >
-                                  <Trash className="h-4 w-4" />
-                                </Button>
-                              </div>
-                            </TableCell>
-                          </TableRow>
-                        )
-                      })
-                    ) : (
-                      <TableRow>
-                        <TableCell colSpan={7} className="h-24 text-center">
-                          Nenhum registro de manutenção encontrado.
-                        </TableCell>
-                      </TableRow>
-                    )}
-                  </TableBody>
-                </Table>
-              </div>
-            </TabsContent>
-
-            <TabsContent value="corrective" className="m-0">
-              {/* Same table structure as "all" tab */}
-
-              <div className="overflow-x-auto">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>ID</TableHead>
-                      <TableHead>Equipamento</TableHead>
-                      <TableHead>Tipo</TableHead>
-                      <TableHead>Data</TableHead>
-                      <TableHead>Técnico (a)</TableHead>
-                      <TableHead>Status</TableHead>
-                      <TableHead className="text-right">Ações</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {filteredMaintenance.length > 0 ? (
-                      filteredMaintenance.map((maintenance) => {
-                        const equipment = getEquipmentDetails(maintenance.equipmentId)
-
-                        return (
-                          <TableRow key={maintenance.id} className="hover:bg-muted/50">
-                            <TableCell className="font-medium">{maintenance.id}</TableCell>
-                            <TableCell>
-                              <div>
-                                <div>{maintenance.equipmentId}</div>
-                                <div className="text-xs text-muted-foreground">
-                                  {equipment?.model} ({equipment?.storeName})
-                                </div>
-                              </div>
-                            </TableCell>
-                            <TableCell>
-                              <StatusBadge type={maintenance.type as any} />
-                            </TableCell>
-                            <TableCell>{new Date(maintenance.date).toLocaleDateString()}</TableCell>
-                            <TableCell>{maintenance.technician}</TableCell>
-                            <TableCell>
-                              <StatusBadge status={maintenance.status as any} />
-                            </TableCell>
-                            <TableCell className="text-right">
-                              <div className="flex items-center justify-end gap-2">
-                                <Button variant="ghost" size="icon" title="View Report">
-                                  <FileText className="h-4 w-4" />
-                                </Button>
-                                <Button
-                                  variant="ghost"
-                                  size="icon"
-                                  title="Edit"
-                                  onClick={() => handleEdit(maintenance)}
-                                >
-                                  <Edit className="h-4 w-4" />
-                                </Button>
-                                <Button
-                                  variant="ghost"
-                                  size="icon"
-                                  title="Delete"
-                                  onClick={() => handleDeleteConfirm(maintenance)}
-                                >
-                                  <Trash className="h-4 w-4" />
-                                </Button>
-                              </div>
-                            </TableCell>
-                          </TableRow>
-                        )
-                      })
-                    ) : (
-                      <TableRow>
-                        <TableCell colSpan={7} className="h-24 text-center">
-                          Nenhum registro de manutenção encontrado.
-                        </TableCell>
-                      </TableRow>
-                    )}
-                  </TableBody>
-                </Table>
-              </div>
-            </TabsContent>
-
-            <TabsContent value="emergency" className="m-0">
-              {/* Same table structure as "all" tab */}
-
-              <div className="overflow-x-auto">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>ID</TableHead>
-                      <TableHead>Equipamento</TableHead>
-                      <TableHead>Tipo</TableHead>
-                      <TableHead>Data</TableHead>
-                      <TableHead>Técnico (a)</TableHead>
-                      <TableHead>Status</TableHead>
-                      <TableHead className="text-right">Ações</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {filteredMaintenance.length > 0 ? (
-                      filteredMaintenance.map((maintenance) => {
-                        const equipment = getEquipmentDetails(maintenance.equipmentId)
-
-                        return (
-                          <TableRow key={maintenance.id} className="hover:bg-muted/50">
-                            <TableCell className="font-medium">{maintenance.id}</TableCell>
-                            <TableCell>
-                              <div>
-                                <div>{maintenance.equipmentId}</div>
-                                <div className="text-xs text-muted-foreground">
-                                  {equipment?.model} ({equipment?.storeName})
-                                </div>
-                              </div>
-                            </TableCell>
-                            <TableCell>
-                              <StatusBadge type={maintenance.type as any} />
-                            </TableCell>
-                            <TableCell>{new Date(maintenance.date).toLocaleDateString()}</TableCell>
-                            <TableCell>{maintenance.technician}</TableCell>
-                            <TableCell>
-                              <StatusBadge status={maintenance.status as any} />
-                            </TableCell>
-                            <TableCell className="text-right">
-                              <div className="flex items-center justify-end gap-2">
-                                <Button variant="ghost" size="icon" title="View Report">
-                                  <FileText className="h-4 w-4" />
-                                </Button>
-                                <Button
-                                  variant="ghost"
-                                  size="icon"
-                                  title="Edit"
-                                  onClick={() => handleEdit(maintenance)}
-                                >
-                                  <Edit className="h-4 w-4" />
-                                </Button>
-                                <Button
-                                  variant="ghost"
-                                  size="icon"
-                                  title="Delete"
-                                  onClick={() => handleDeleteConfirm(maintenance)}
-                                >
-                                  <Trash className="h-4 w-4" />
-                                </Button>
-                              </div>
-                            </TableCell>
-                          </TableRow>
-                        )
-                      })
-                    ) : (
-                      <TableRow>
-                        <TableCell colSpan={7} className="h-24 text-center">
-                          Nenhum registro de manutenção encontrado.
-                        </TableCell>
-                      </TableRow>
-                    )}
-                  </TableBody>
-                </Table>
-              </div>
-            </TabsContent>
+            
+            {maintenanceTypes.map((type) => (
+              <TabsContent key={type} value={type} className="m-0">
+                <div className="overflow-x-auto">
+                  <MaintenanceTable 
+                    data={filteredMaintenance}
+                    equipmentData={equipmentData}
+                    onEdit={handleEdit}
+                    onDelete={handleDeleteConfirm}
+                  />
+                </div>
+              </TabsContent>
+            ))}
           </Tabs>
         </div>
       </div>
