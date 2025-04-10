@@ -6,7 +6,7 @@ interface StatusBadgeProps {
 }
 
 interface StatusBadgePropsEquipment {
-  statusEquipment?: "Operational" | "Maintenance Required" | "Critical Alert"
+  statusEquipment?: "Operational" | "Maintenance Required" | "Critical Alert" | string
 }
 
 export function StatusBadge({ status, type, statusEquipment }: StatusBadgeProps & StatusBadgePropsEquipment) {

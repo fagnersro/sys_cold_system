@@ -10,14 +10,16 @@ import {
   Calendar,
 } from "lucide-react"
 
+import { StatusBadge } from "@/components/refrigeration/status-badge"
+
 export default async function RefrigerationDashboardPage() {
   const equipmentList = [
-    { id: "RF-001", name: "Cold Storage A", temp: "-18°C", health: 90, status: "Operacional" },
-    { id: "RF-002", name: "Freezer Unit B", temp: "-22°C", health: 78, status: "Operacional" },
-    { id: "RF-003", name: "Display Case C", temp: "2°C", health: 65, status: "Manutenção necessária" },
-    { id: "RF-004", name: "Walk-in Cooler D", temp: "4°C", health: 88, status: "Operacional" },
-    { id: "RF-005", name: "Processing Room E", temp: "-5°C", health: 45, status: "Alerta Crítico" },
-    { id: "RF-006", name: "Transport Unit F", temp: "-15°C", health: 81, status: "Operacional" },
+    { id: "RF-001", name: "Cold Storage A", temp: "-18°C", health: 90, status: "Operational" },
+    { id: "RF-002", name: "Freezer Unit B", temp: "-22°C", health: 78, status: "Operational" },
+    { id: "RF-003", name: "Display Case C", temp: "2°C", health: 65, status: "Maintenance Required" },
+    { id: "RF-004", name: "Walk-in Cooler D", temp: "4°C", health: 88, status: "Operational" },
+    { id: "RF-005", name: "Processing Room E", temp: "-5°C", health: 45, status: "Critical Alert" },
+    { id: "RF-006", name: "Transport Unit F", temp: "-15°C", health: 81, status: "Operational" },
   ]
 
   const upcomingMaintenance = [
@@ -102,17 +104,9 @@ export default async function RefrigerationDashboardPage() {
                       <Snowflake className="h-4 w-4 text-blue-500" />
                       <span className="text-sm font-medium">{equipment.temp}</span>
                     </div>
-                    <div
-                      className={`rounded-full px-2 py-1 text-xs font-medium ${
-                        equipment.status === "Operacional"
-                          ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
-                          : equipment.status === "Manutenção necessária"
-                          ? "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400"
-                          : "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"
-                      }`}
-                    >
-                      {equipment.status}
-                    </div>
+
+                    <StatusBadge statusEquipment={equipment.status}/>
+                  
                   </div>
                   <div className="space-y-1">
                     <div className="flex items-center justify-between text-xs">
