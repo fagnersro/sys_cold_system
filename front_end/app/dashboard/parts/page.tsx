@@ -1,6 +1,7 @@
 import { RefrigerationDashboardLayout } from "@/components/refrigeration/dashboard-layout";
 import { PartsTable } from "./components/client/parts-table";
 import { partsData, equipmentData, usageHistoryData } from "./data/mock-parts";
+import { UsageHistorySection } from "./components/shared/usage-history-section";
 
 export default function InventoryPage() {
   return (
@@ -17,6 +18,12 @@ export default function InventoryPage() {
           initialParts={partsData} 
           equipment={equipmentData} 
           usageHistory={usageHistoryData} 
+        />
+
+        <UsageHistorySection 
+          usageHistory={usageHistoryData} 
+          parts={partsData}
+          equipment={equipmentData}
         />
       </div>
     </RefrigerationDashboardLayout>

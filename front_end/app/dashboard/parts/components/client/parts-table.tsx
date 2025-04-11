@@ -156,19 +156,6 @@ export function PartsTable({ initialParts, equipment, usageHistory }: PartsTable
         ))}
       </Tabs>
 
-      {/* Diálogos */}
-      {/* <PartFormDialog
-        open={isAddDialogOpen}
-        onOpenChange={setIsAddDialogOpen}
-        part={selectedPart}
-        equipment={equipment}
-        onSubmit={(data) => {
-          selectedPart 
-            ? updatePart({ ...data, id: selectedPart.id })
-            : addPart(data);
-        }}
-      /> */}
-
         <PartFormDialog
           open={isAddDialogOpen}
           onOpenChange={setIsAddDialogOpen}
