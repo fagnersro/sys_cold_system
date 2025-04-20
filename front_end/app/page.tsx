@@ -149,7 +149,7 @@ export default function LandingPage() {
                 <div className="relative aspect-square max-w-md mx-auto lg:max-w-none overflow-hidden rounded-2xl bg-gradient-to-br from-blue-100 to-blue-50 p-2">
                   <div className="absolute inset-0 bg-grid-black/5 [mask-image:linear-gradient(to_bottom,white,transparent)]"></div>
                   <Image
-                    src="/placeholder.svg?height=600&width=600"
+                    src="/img-dashboard.png?height=600&width=600"
                     width={600}
                     height={600}
                     alt="Product visualization"

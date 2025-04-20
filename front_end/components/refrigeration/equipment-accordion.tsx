@@ -65,7 +65,7 @@ export function EquipmentAccordion({ stores }: { stores: any[] }) {
 
       <div className="rounded-xl border bg-card text-card-foreground shadow">
         <Accordion type="multiple" value={expandedStores} onValueChange={setExpandedStores}>
-          {filteredStores.map((store) => (
+          {stores.map((store) => (
             <AccordionItem key={store.id} value={store.id}>
               <AccordionTrigger className="px-4 py-3 hover:bg-muted/50">
                 <div className="flex items-center gap-2">
