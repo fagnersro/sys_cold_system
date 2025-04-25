@@ -1,9 +1,17 @@
 import { Injectable } from '@nestjs/common';
+import { Equipment } from './entities/equipment.entity';
+import type { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 import { CreateEquipmentDto } from './dto/create-equipment.dto';
 import { UpdateEquipmentDto } from './dto/update-equipment.dto';
 
 @Injectable()
 export class EquipmentService {
+  constructor(
+    @InjectRepository(Equipment)
+    private readonly equipmentRepository: Repository<Equipment>,
+  ) {}
+
   create(createEquipmentDto: CreateEquipmentDto) {
     return 'This action adds a new equipment';
   }

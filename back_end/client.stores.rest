@@ -1,0 +1,37 @@
+#Story
+@baseUrl = http://localhost:3001
+###
+
+# LISTA TODAS AS LOJAS
+###
+GET {{baseUrl}}/stores/
+
+# LISTA APENAS UMA LOJA
+###
+GET {{baseUrl}}/stores/5
+
+# CRIA UMA LOJA
+###
+POST {{baseUrl}}/stores
+Content-Type: application/json
+
+{
+  "name": "Quitandaria",
+  "address": "Rua paulo freire",
+  "phone": 555,
+  "manager": "Flávio",
+  "coordinates": "1252"
+}
+
+# REMOVE UMA LOJA
+###
+DELETE {{baseUrl}}/stores/2
+
+# ATUALIZA UMA LOJA
+###
+PATCH {{baseUrl}}/stores/2
+Content-Type: : application/json
+
+{
+  
+}

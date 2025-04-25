@@ -1,0 +1,33 @@
+#Equipment
+@baseUrl = http://localhost:3001
+###
+
+# LISTA TODOS OS EQUIPAMENTOS
+###
+GET {{baseUrl}}/equipment/
+
+# LISTA APENAS UM EQUIPAMENTO
+###
+GET {{baseUrl}}/equipment/1
+
+# CRIA UM EQUIPAMENTO
+###
+POST {{baseUrl}}/equipment/
+Content-Type: application/json
+
+{
+
+}
+
+# REMOVE UM EQUIPAMENTO
+###
+DELETE {{baseUrl}}/equipment/2
+
+# ATUALIZA UM EQUIPAMENT
+###
+PATCH {{baseUrl}}/equipment/2
+Content-Type: : application/json
+
+{
+  
+}
