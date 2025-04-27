@@ -3,11 +3,13 @@ import {
   IsNumber,
   IsOptional,
   IsString,
+  IsUUID,
   Matches,
   ValidateNested,
 } from '@nestjs/class-validator';
-import { BaseEntity, Column, Entity, PrimaryColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Type } from 'class-transformer';
+import { Equipment } from 'src/equipment/entities/equipment.entity';
 
 class Coordinates {
   @Column('float')
@@ -21,9 +23,8 @@ class Coordinates {
 
 @Entity('stores')
 export class Store extends BaseEntity {
-  @PrimaryColumn()
-  @IsString()
-  @IsNotEmpty()
+  @PrimaryGeneratedColumn('uuid')
+  @IsUUID()
   id: string;
 
   @Column()
@@ -52,4 +53,7 @@ export class Store extends BaseEntity {
   @ValidateNested()
   @Type((): new () => Coordinates => Coordinates)
   coordinates: Coordinates;
+
+  @OneToMany(() => Equipment, (equipment) => equipment.store)
+  equipments: Equipment[];
 }

@@ -18,9 +18,12 @@ Content-Type: application/json
 {
   "name": "Quitandaria",
   "address": "Rua paulo freire",
-  "phone": 555,
+  "phone": "81922456978",
   "manager": "Flávio",
-  "coordinates": "1252"
+  "coordinates": {
+    "lat": 1455,
+    "lng": 5514
+  }
 }
 
 # REMOVE UMA LOJA

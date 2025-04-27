@@ -1,5 +1,7 @@
-import { Story } from 'src/stories/entities/story.entity';
+import { IsDateString, IsIn, IsNotEmpty, IsString, IsUUID } from '@nestjs/class-validator';
+import { Store } from 'src/stores/entities/store.entity';
 import {
+  BaseEntity,
   Column,
   CreateDateColumn,
   Entity,
@@ -10,35 +12,45 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class Equipment {
-  @PrimaryGeneratedColumn()
-  id: number;
+export class Equipment extends BaseEntity {
+  @PrimaryGeneratedColumn('uuid')
+  @IsUUID()
+  id: string;
 
-  @Column({ length: 100 })
+  @Column()
+  @IsString()
+  @IsNotEmpty()
   model: string;
 
-  @Column({ length: 100 })
+  @Column()
+  @IsString()
+  @IsNotEmpty()
   serialNumber: string;
-
+  
   @Column()
-  storeId: number;
-
-  @Column({ length: 100 })
+  @IsString()
+  @IsIn(['Operational', 'Maintenance', 'Offline'])
   status: string;
-
+  
   @Column()
-  installationDate: Date;
-
+  @IsDateString()
+  installationDate: string;
+  
   @Column()
-  lastMaintenance: Date;
-
+  @IsDateString()
+  lastMaintenance: string;
+  
   @CreateDateColumn()
   createdAt?: Date;
-
+  
   @UpdateDateColumn()
   updateAt?: Date;
-
-  @ManyToOne(() => Story, (story) => story.equipment, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'story' })
-  story?: Story;
+  
+  @ManyToOne(() => Store, (store) => store.equipments, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'storeId' })
+  store: Store;
+  
+  @Column()
+  @IsUUID()
+  storeId: string;
 }

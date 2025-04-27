@@ -1,24 +1,22 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { EquipmentModule } from './equipment/equipment.module';
-import { StoriesModule } from './stories/stories.module';
 import { StoresModule } from './stores/stores.module';
+
+import { ConfigModule } from '@nestjs/config'
+import { databaseConfig } from './config/database.config';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: process.env.DB_HOST || 'localhost',
-      port: 5432,
-      username: process.env.DB_USERNAME || 'postgres',
-      password: process.env.DB_PASSWORD || 'postgres',
-      database: process.env.DB_DATABASE || 'sys_cold',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true, // Apenas para desenvolvimento
-      autoLoadEntities: true,
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    TypeOrmModule.forRootAsync({
+      useFactory: databaseConfig,
+      inject:[],
     }),
     EquipmentModule,
-    StoriesModule,
+    StoresModule,
     StoresModule,
   ],
   controllers: [],

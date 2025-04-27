@@ -19,10 +19,6 @@ class CoordinatesDto {
 export class CreateStoreDto {
   @IsString()
   @IsNotEmpty()
-  id: string;
-
-  @IsString()
-  @IsNotEmpty()
   name: string;
 
   @IsString()
@@ -30,8 +26,8 @@ export class CreateStoreDto {
   address: string;
 
   @IsString()
-  @Matches(/^\d{3}-\d{3}-\d{4}$/, {
-    message: 'Phone number must be in the format XXX-XXX-XXXX',
+  @Matches(/^\s*(\d{2}|\d{0})[-. ]?(\d{5}|\d{4})[-. ]?(\d{4})[-. ]?\s*$/gm, {
+    message: 'Phone number must be in the format XX-X-XXXXXXXX',
   })
   phone: string;
 
